@@ -16,6 +16,10 @@ def get_fractional_part(number):
 # convert any decimal number to any base, only works with base-2 up to base-36 (all alphabetical letters)
 # if you add more symbols in the symbols tuple, more available bases are added too
 def integer_decimal_to_any_base(number, base):
+    # to avoid crash whit floating's numbers
+    number = int(number)
+    if number == 0:
+        return 0
     result = ""
     while not number == 0:
         result = result + symbols[number % base]
@@ -23,3 +27,18 @@ def integer_decimal_to_any_base(number, base):
     # reverse the result to be correct
     result = result[::-1]
     return result
+
+
+# does practically the same as integer converter, but works with floating numbers
+def floating_decimal_to_any_base(number, base):
+    integer_part = int(number)
+    fractional_part = get_fractional_part(number)
+    fractional_part = 0 if not fractional_part else fractional_part
+    result = "{}.{}".format(
+        integer_decimal_to_any_base(integer_part, base),
+        integer_decimal_to_any_base(fractional_part, base)
+    )
+    return result
+
+
+print(integer_decimal_to_any_base(10.255, 16))
