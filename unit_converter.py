@@ -41,4 +41,10 @@ def floating_decimal_to_any_base(number, base):
     return result
 
 
-print(integer_decimal_to_any_base(10.255, 16))
+# check if the number is integer or floating and convert whit correct method
+def decimal_to_any_base(number, base):
+    # check if the number is floating or integer
+    if int(number) == number:
+        return integer_decimal_to_any_base(number, base)
+    else:
+        return floating_decimal_to_any_base(number, base)
