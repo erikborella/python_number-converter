@@ -65,5 +65,27 @@ class TestFloatingDecimalToAnyBase(unittest.TestCase):
         self.assertEqual('FF.FF', unit_converter.floating_decimal_to_any_base(255.255, 16))
 
 
+class TestDecimalToAnyBase(unittest.TestCase):
+    def test_binary_convert(self):
+        self.assertEqual('1010', unit_converter.decimal_to_any_base(10, 2))
+        self.assertEqual('1010', unit_converter.decimal_to_any_base(10.0, 2))
+        self.assertEqual('1010.1', unit_converter.decimal_to_any_base(10.1, 2))
+
+    def test_octal_convert(self):
+        self.assertEqual('12', unit_converter.decimal_to_any_base(10, 8))
+        self.assertEqual('12', unit_converter.decimal_to_any_base(10.0, 8))
+        self.assertEqual('12.1', unit_converter.decimal_to_any_base(10.1, 8))
+
+    def test_decimal_convert(self):
+        self.assertEqual('10', unit_converter.decimal_to_any_base(10, 10))
+        self.assertEqual('10', unit_converter.decimal_to_any_base(10.0, 10))
+        self.assertEqual('10.1', unit_converter.decimal_to_any_base(10.1, 10))
+
+    def test_hexadecimal_convert(self):
+        self.assertEqual('A', unit_converter.decimal_to_any_base(10, 16))
+        self.assertEqual('A', unit_converter.decimal_to_any_base(10.0, 16))
+        self.assertEqual('A.1', unit_converter.decimal_to_any_base(10.1, 16))
+
+
 if __name__ == '__main__':
     unittest.main()
