@@ -2,6 +2,16 @@ symbols = ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D',
            'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z')
 
 
+# return only the integer part of a number, is used number that not use only numbers, like hexadecimal
+def get_integer_part(number):
+    number = str(number)
+    dot_index = number.find('.')
+    if dot_index == -1:
+        return None
+    integer_part = number[0:dot_index]
+    return integer_part
+
+
 # divide the fractional part of a number and return it as integer
 # if the fractional part does not exist, return None
 def get_fractional_part(number):
@@ -9,7 +19,7 @@ def get_fractional_part(number):
     dot_index = number.find('.')
     if dot_index == -1:
         return None
-    fraction_part = int(number[dot_index+1::])
+    fraction_part = number[dot_index+1::]
     return fraction_part
 
 
@@ -59,5 +69,18 @@ def integer_any_base_to_decimal(number, base):
         # find the value of the symbol in the symbols tuple
         value = symbols.index(number[i])
         result = result + (value * base ** i)
+    return int(result)
+
+
+# does practically the same as integer converter, but works with floating numbers
+def floating_any_base_to_decimal(number, base):
+    integer_part = get_integer_part(number)
+    integer_part = 0 if not integer_part else integer_part
+    fractional_part = get_fractional_part(number)
+    fractional_part = 0 if not fractional_part else fractional_part
+    result = "{}.{}".format(
+        integer_any_base_to_decimal(integer_part, base),
+        integer_any_base_to_decimal(fractional_part, base)
+    )
     return result
 
