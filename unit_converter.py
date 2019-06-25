@@ -48,3 +48,16 @@ def decimal_to_any_base(number, base):
         return integer_decimal_to_any_base(number, base)
     else:
         return floating_decimal_to_any_base(number, base)
+
+
+# Convert any number in any base to a decimal base number
+def integer_any_base_to_decimal(number, base):
+    # reverse the number
+    number = str(number)[::-1]
+    result = 0
+    for i in range(len(number)):
+        # find the value of the symbol in the symbols tuple
+        value = symbols.index(number[i])
+        result = result + (value * base ** i)
+    return result
+

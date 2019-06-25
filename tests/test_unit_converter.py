@@ -87,5 +87,23 @@ class TestDecimalToAnyBase(unittest.TestCase):
         self.assertEqual('A.1', unit_converter.decimal_to_any_base(10.1, 16))
 
 
+class TestIntegerAnyBaseToDecimal(unittest.TestCase):
+    def test_binary_convert(self):
+        self.assertEqual(10, unit_converter.integer_any_base_to_decimal('1010', 2))
+        self.assertEqual(255, unit_converter.integer_any_base_to_decimal('11111111', 2))
+
+    def test_octal_convert(self):
+        self.assertEqual(10,  unit_converter.integer_any_base_to_decimal('12', 8))
+        self.assertEqual(255, unit_converter.integer_any_base_to_decimal('377', 8))
+
+    def test_decimal_convert(self):
+        self.assertEqual(10, unit_converter.integer_any_base_to_decimal('10', 10))
+        self.assertEqual(255, unit_converter.integer_any_base_to_decimal('255', 10))
+
+    def test_hexadecimal_convert(self):
+        self.assertEqual(10, unit_converter.integer_any_base_to_decimal('A', 16))
+        self.assertEqual(255, unit_converter.integer_any_base_to_decimal('FF', 16))
+
+
 if __name__ == '__main__':
     unittest.main()
